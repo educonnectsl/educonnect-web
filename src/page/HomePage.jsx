@@ -5,6 +5,7 @@ import Introduction from '../component/home/Introduction';
 import { COLORS } from '../util/Constant';
 import WhoWeAre from '../component/home/WhoWeAre';
 import HowItWorks from '../component/home/HowItWorks';
+import GetInvolved from '../component/home/GetInvolved';
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
         <Introduction />
         <WhoWeAre />
         <HowItWorks />
+        <GetInvolved />
       </Container>
     </>
   );
