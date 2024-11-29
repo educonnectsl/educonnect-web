@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const theme = createTheme({
   palette: {
@@ -10,7 +11,8 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: 'Poppins, Roboto, sans-serif',
   },
   components: {
     MuiButton: {

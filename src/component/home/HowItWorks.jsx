@@ -28,13 +28,13 @@ const paperContent = [
 
 const HowItWorks = () => {
   return (
-    <Box sx={{ mx: 0, my: 2, display: 'flex', justifyContent: 'center', backgroundColor: COLORS.SECONDARY }}>
-      <Stack sx={{ py: 5, width: '80%', alignItems: 'center' }}>
+    <Box sx={{ p: 4, display: 'flex', justifyContent: 'center', backgroundColor: COLORS.LIGHT_PURPLE }}>
+      <Stack sx={{ my: 5, width: '80%', alignItems: 'center' }}>
         <Typography variant='body1' align='center'>
           How It Works
         </Typography>
-        <Typography variant='h3' align='center' sx={{ color: COLORS.PRIMARY, pt: 0, pb: 2 }}>
-          HOW EDUCONNECTSL <br /> WORKS?
+        <Typography variant='h3' align='center' sx={{ fontWeight: 'bold', color: COLORS.PRIMARY, mb: 2 }}>
+          HOW EDUCONNECT-SL <br /> WORKS?
         </Typography>
         <Typography variant='p' align='center'>
           See how EduConnect SL bridges the gap between schools in need and compassionate donors.
@@ -60,7 +60,7 @@ const HowItWorks = () => {
                     <Typography variant='h5'>
                       {content.title}
                     </Typography>
-                    <Typography sx={{ mb: 4 }} variant='body2'>
+                    <Typography sx={{ mb: 4 }} variant='p'>
                       {content.description}
                     </Typography>
                   </Box>

@@ -5,14 +5,14 @@ import { COLORS } from '../../util/Constant';
 
 const GetInvolved = () => {
   return (
-    <Box sx={{ mx: 0, my: 2, display: 'flex', backgroundColor: 'white' }}>
+    <Box sx={{ p:4, pb: 0, backgroundColor: COLORS.WHITE }}>
       <Grid2 container spacing={5}>
         <Grid2 size={{ xs: 12, md: 7 }}>
           <Box sx={{ m: 5, mt: 10 }}>
             <Typography variant='body1'>
               Get Involved
             </Typography>
-            <Typography variant='h3' sx={{ color: COLORS.PRIMARY, pt: 0, pb: 2 }}>
+            <Typography variant='h3' sx={{ fontWeight: 'bold', color: COLORS.PRIMARY, mb: 2 }}>
               JOIN US IN MAKING A DIFFERENCE
             </Typography>
             <Typography variant='p'>
@@ -41,13 +41,13 @@ const GetInvolved = () => {
 
         <Grid2 size={{ xs: 0, md: 5, display: { xs: 'none', md: 'flex' } }}>
           <Box
-            component="img"
-            src="get_involved_background.png"
-            alt="Introduction Background"
             sx={{
-              mt: 5,
               width: '100%',
-              objectFit: 'cover',
+              height: '100%',
+              backgroundImage: 'url(get_involved_background.png)',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right bottom',
             }}
           />
         </Grid2>

@@ -5,21 +5,21 @@ import { COLORS } from '../../util/Constant';
 
 const Introduction = () => {
   return (
-    <Box sx={{ m: 0, p: 2, pr: 0 }}>
+    <Box sx={{ p: 4, pr: 0, backgroundColor: COLORS.LIGHT_PURPLE }}>
       <Grid2 container spacing={5}>
-        <Grid2 size={{ xs: 12, md: 8 }}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Box sx={{ m: 5, mt: 10 }}>
-            <Typography variant='h2'>
+            <Typography variant='h2' sx={{ fontWeight: 'bold' }}>
               Empowering <span style={{ color: COLORS.PRIMARY }}>Eduction</span>
               <br />
               Uplifting Communities in Sri Lanka
             </Typography>
-            <Typography variant='h5'>
+            <Typography variant='p'>
               Connecting donors with schools and students in need to transform eduction
               and bring positive change to local communities.
             </Typography>
           </Box>
-          <Box sx={{ m: 5 }}>
+          <Box sx={{ m: 5, mb: 10 }}>
             <Button
               size='medium'
               variant='contained'
@@ -38,15 +38,15 @@ const Introduction = () => {
           </Box>
         </Grid2>
 
-        <Grid2 size={{ xs: 0, md: 4, display: { xs: 'none', md: 'flex' } }}>
+        <Grid2 size={{ xs: 0, md: 6, display: { xs: 'none', md: 'flex' } }}>
           <Box
-            component="img"
-            src="introduction_background.png"
-            alt="Introduction Background"
             sx={{
-              p: 0, m: 0,
               width: '100%',
-              objectFit: 'cover',
+              height: '100%',
+              backgroundImage: 'url(introduction_background.png)',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right',
             }}
           />
         </Grid2>
