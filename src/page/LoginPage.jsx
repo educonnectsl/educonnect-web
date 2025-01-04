@@ -2,9 +2,15 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Box, Button, Container, Divider, Grid2, Link, TextField, Typography } from '@mui/material';
 import React from "react";
 import Header from '../component/Header';
-import { COLORS } from '../util/Constant';
+import { COLORS, PATHS } from '../util/Constant';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleLoginOnClick = () => {
+    navigate(PATHS.DASHBOARD);
+  };
 
   return (
     <>
@@ -76,6 +82,7 @@ const LoginPage = () => {
                     variant='contained'
                     size='small'
                     sx={{ width: '100%' }}
+                    onClick={handleLoginOnClick}
                   >
                     Login
                   </Button>
@@ -88,6 +95,7 @@ const LoginPage = () => {
                     variant='outlined'
                     size='small'
                     sx={{ width: '100%', textTransform: 'none' }}
+                    onClick={handleLoginOnClick}
                   >
                     <GoogleIcon sx={{ width: 15, height: 15, mx: 1 }} />
                     Login with Google

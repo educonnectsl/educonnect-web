@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PATHS } from '../util/Constant';
+import { COLORS, PATHS } from '../util/Constant';
 
 const pages = ['Support Categories', 'News', 'Contact', 'About'];
 
@@ -46,7 +46,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="sticky" color='secondary' sx={{ minWidth: 720 }}>
+    <AppBar position="sticky" sx={{ minWidth: 720, backgroundColor: COLORS.SECONDARY }}>
       <Container maxWidth='false'>
         <Toolbar variant='dense' disableGutters sx={{
           flexDirection: 'row',

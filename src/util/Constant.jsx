@@ -2,8 +2,15 @@ export const PATHS = {
   HOME: "/",
   LOGIN: "/login",
   SIGN_UP: "/signup",
+  DASHBOARD: "/dashboard",
   ERROR: "/error",
-  WILDCARD: "/*"
+  WILDCARD: "/*",
+
+  WILD_CARD: "/*",
+
+  ACCOUNT: "/account",
+  SEARCH: "/search",
+  SETTINGS: "/settings"
 }
 
 export const COLORS = {

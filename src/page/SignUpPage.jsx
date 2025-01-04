@@ -2,12 +2,18 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Box, Button, Container, Divider, Grid2, Link, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import React, { useState } from "react";
 import Header from '../component/Header';
-import { COLORS } from '../util/Constant';
+import { COLORS, PATHS } from '../util/Constant';
+import { useNavigate } from 'react-router-dom';
 
 const SIGNUP_TYPE = { TEACHER: 'Teacher', DONOR: 'Donor' };
 
 const SignUpPage = () => {
   const [signUpType, setSignUpType] = useState(undefined);
+  const navigate = useNavigate();
+
+  const handleSignUpOnClick = () => {
+    navigate(PATHS.DASHBOARD);
+  };
 
   return (
     <>
@@ -108,6 +114,7 @@ const SignUpPage = () => {
                     variant='contained'
                     size='small'
                     sx={{ width: '100%' }}
+                    onClick={handleSignUpOnClick}
                   >
                     Create an account
                   </Button>
@@ -120,6 +127,7 @@ const SignUpPage = () => {
                     variant='outlined'
                     size='small'
                     sx={{ width: '100%', textTransform: 'none' }}
+                    onClick={handleSignUpOnClick}
                   >
                     <GoogleIcon sx={{ width: 15, height: 15, mx: 1 }} />
                     Signup with Google

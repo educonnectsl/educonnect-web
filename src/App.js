@@ -3,6 +3,7 @@ import HomePage from './page/HomePage';
 import LoginPage from './page/LoginPage';
 import SignUpPage from './page/SignUpPage';
 import { COLORS, PATHS } from './util/Constant';
+import DashboardPage from './page/DashboardPage';
 
 function App() {
 
@@ -17,9 +18,10 @@ function App() {
     }}>
       <BrowserRouter>
         <Routes>
-          <Route path={PATHS.HOME} element={<HomePage />} />
+          <Route index element={<HomePage />} />
           <Route path={PATHS.LOGIN} element={<LoginPage />} />
           <Route path={PATHS.SIGN_UP} element={<SignUpPage />} />
+          <Route path={PATHS.DASHBOARD + PATHS.WILD_CARD} element={<DashboardPage />} />
         </Routes>
       </BrowserRouter>
     </div>
