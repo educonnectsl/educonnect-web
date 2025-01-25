@@ -7,6 +7,7 @@ import DonorSettings from '../component/dashboard/DonorSettings';
 import SearchAndDonate from '../component/dashboard/SearchAndDonate';
 import SideBar from '../component/dashboard/SideBar';
 import { COLORS, PATHS } from '../util/Constant';
+import ViewRequest from '../component/dashboard/ViewRequest';
 
 const DashboardPage = () => {
 
@@ -14,7 +15,7 @@ const DashboardPage = () => {
     <Container 
       maxWidth={false} 
       disableGutters 
-      sx={{height: '100vh', backgroundColor: COLORS.BACKGROUND }}
+      sx={{minHeight: '100vh', backgroundColor: COLORS.BACKGROUND }}
     >
       <SideBar />
 
@@ -24,6 +25,7 @@ const DashboardPage = () => {
           <Route path={PATHS.ACCOUNT} element={<Account />} />
           <Route path={PATHS.SEARCH} element={<SearchAndDonate />} />
           <Route path={PATHS.SETTINGS} element={<DonorSettings />} />
+          <Route path={PATHS.VIEW_REQUEST + PATHS.ID_PARAM} element={<ViewRequest />} />
         </Routes>
       </Box>
       </Container>

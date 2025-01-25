@@ -2,7 +2,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, Divider, Grid2, IconButton, InputBase, Paper, Typography } from '@mui/material';
 import React from 'react';
-import { COLORS } from '../../util/Constant';
+import { COLORS, PATHS } from '../../util/Constant';
+import { useNavigate } from 'react-router-dom';
 
 const schoolResult = [
   {
@@ -63,6 +64,8 @@ const schoolResult = [
 ];
 
 const DonorOverview = () => {
+  const navigate = useNavigate();
+
   return (
     <Grid2 container spacing={2} maxWidth="lg">
       <Grid2
@@ -155,12 +158,17 @@ const DonorOverview = () => {
                 sx={{ mt: 2 }}
                 fullWidth
                 variant='contained'
-              >Donate</Button>
+              >
+                Donate
+              </Button>
               <Button
                 sx={{ mt: 1 }}
                 fullWidth
                 variant='outlined'
-              >View</Button>
+                onClick={() => navigate(PATHS.DASHBOARD + PATHS.VIEW_REQUEST +  "/" + school.index)}
+              >
+                View
+              </Button>
             </Grid2>
           ))}
         </Grid2>

@@ -7,10 +7,12 @@ export const PATHS = {
   WILDCARD: "/*",
 
   WILD_CARD: "/*",
+  ID_PARAM: "/:id",
 
   ACCOUNT: "/account",
   SEARCH: "/search",
-  SETTINGS: "/settings"
+  SETTINGS: "/settings",
+  VIEW_REQUEST: "/request",
 }
 
 export const COLORS = {
