@@ -10,7 +10,7 @@ const GetInvolved = () => {
         <Grid2 size={{ xs: 12, md: 7 }}>
           <Box sx={{ m: 5, mt: 10 }}>
             <Typography variant='body1'>
-              Get Involved
+              Get involved
             </Typography>
             <Typography variant='h3' sx={{ fontWeight: 'bold', color: COLORS.PRIMARY, mb: 2 }}>
               JOIN US IN MAKING A DIFFERENCE
@@ -27,14 +27,14 @@ const GetInvolved = () => {
               sx={{ mr: 2 }}
               endIcon={<ArrowForwardOutlinedIcon />}
             >
-              Need to Help
+              Need to help
             </Button>
             <Button
               size='medium'
               variant='outlined'
               endIcon={<ArrowForwardOutlinedIcon />}
             >
-              Help Needed
+              Help needed
             </Button>
           </Box>
         </Grid2>

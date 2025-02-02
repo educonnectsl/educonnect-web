@@ -7,17 +7,15 @@ const WhoWeAre = () => {
     <Box sx={{ p: 4, display: 'flex', justifyContent: 'center', backgroundColor: COLORS.WHITE }}>
       <Stack sx={{ my: 5, width: '80%', alignItems: 'center' }}>
         <Typography variant='body1' align='center'>
-          About Us
+          About us
         </Typography>
         <Typography variant='h3' align='center' sx={{ fontWeight: 'bold', color: COLORS.PRIMARY, mb: 2 }}>
           WHO WE ARE?
         </Typography>
         <Typography variant='p' align='center'>
-          EduConnectSL is a platform dedicated to connecting donors,
-          NGOs, and communities with schools and students in need across Sri Lanka.
-          Our goal is to make education accessible and create sustainable
-          development opportunities in local communities.
-          Together, we can transform lives and uplift entire regions.
+          EduConnectSL connects donors, NGOs, and communities with schools and students in need across Sri Lanka.
+          Our mission is to make education accessible and create sustainable opportunities for local communities. 
+          Through collective effort, we can strengthen Sri Lanka’s education system and create a brighter future for students.
         </Typography>
       </Stack>
     </Box>

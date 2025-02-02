@@ -26,14 +26,14 @@ const Introduction = () => {
               sx={{ mr: 2 }}
               endIcon={<ArrowForwardOutlinedIcon />}
             >
-              Schools in Need
+              Need to help
             </Button>
             <Button
               size='medium'
               variant='outlined'
               endIcon={<ArrowForwardOutlinedIcon />}
             >
-              Who we are
+              Help needed
             </Button>
           </Box>
         </Grid2>

@@ -31,15 +31,14 @@ const HowItWorks = () => {
     <Box sx={{ p: 4, display: 'flex', justifyContent: 'center', backgroundColor: COLORS.LIGHT_PURPLE }}>
       <Stack sx={{ my: 5, width: '80%', alignItems: 'center' }}>
         <Typography variant='body1' align='center'>
-          How It Works
+          Our process
         </Typography>
         <Typography variant='h3' align='center' sx={{ fontWeight: 'bold', color: COLORS.PRIMARY, mb: 2 }}>
-          HOW EDUCONNECT-SL <br /> WORKS?
+          HOW IT ALL WORKS?
         </Typography>
         <Typography variant='p' align='center'>
-          See how EduConnect SL bridges the gap between schools in need and compassionate donors.
-          Explore our streamlined process for identifying school needs, connecting contributors,
-          and ensuring your support makes a meaningful impact where it's needed most.
+          See how EduConnectSL bridges the gap between schools in need and compassionate donors. 
+          Our platform provides transparent information, empowering donors to make informed decisions and support the schools that need it most.
         </Typography>
 
         {
