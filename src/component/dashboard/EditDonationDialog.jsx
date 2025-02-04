@@ -1,7 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid2, InputAdornment, TextField, Typography } from '@mui/material';
+import { Button, Chip, Dialog, DialogActions, DialogContent, DialogTitle, Grid2, InputAdornment, TextField, Typography } from '@mui/material';
 import React from 'react';
 
-export default function DonationDialog({ openDialog, onClose }) {
+export default function EditDonationDialog({ openDialog, onClose }) {
 
   return (
     <Dialog
@@ -46,13 +46,13 @@ export default function DonationDialog({ openDialog, onClose }) {
               size='small'
               multiline
               maxRows={5}
-              rows={5}
+              minRows={3}
             />
           </Grid2>
 
           <Grid2 size={{ xs: 3 }} sx={{ mb: 1 }}>
             <Typography variant='body2'>
-              Estimation
+              Contribution
             </Typography>
           </Grid2>
           <Grid2 size={{ xs: 9 }} sx={{ mb: 1 }}>
@@ -68,24 +68,28 @@ export default function DonationDialog({ openDialog, onClose }) {
               type='number'
             />
           </Grid2>
-          
-          <Grid2 size={{ xs: 3 }}>
-            <Typography variant='body2'>Created by</Typography>
-          </Grid2>
-          <Grid2 size={{ xs: 9 }}>
-            <Typography variant='body2'>John Doe</Typography>
-          </Grid2>
+
+          {/* TODO: need file upload to prove the contribution */}
+
           <Grid2 size={{ xs: 3 }}>
             <Typography variant='body2'>Created at</Typography>
           </Grid2>
           <Grid2 size={{ xs: 9 }}>
-            <Typography variant='body2'>25 Sep 2025</Typography>
+            <Typography variant='body2' sx={{ fontWeight: 'bold' }}>25 Sep 2025</Typography>
+          </Grid2>
+          <Grid2 size={{ xs: 3 }}>
+            <Typography variant='body2'>Modified at</Typography>
+          </Grid2>
+          <Grid2 size={{ xs: 9 }}>
+            <Typography variant='body2' sx={{ fontWeight: 'bold' }}>27 Sep 2025</Typography>
           </Grid2>
           <Grid2 size={{ xs: 3 }} sx={{ mb: 1 }}>
             <Typography variant='body2'>Status</Typography>
           </Grid2>
           <Grid2 size={{ xs: 9 }} sx={{ mb: 1 }}>
-            <Typography variant='body2'>NEW</Typography>
+            <Typography component="div" variant='body2'>
+              <Chip label="NEW" color="info" variant="contined" size='small' />
+            </Typography>
           </Grid2>
         </Grid2>
       </DialogContent>

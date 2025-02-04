@@ -22,5 +22,5 @@ export const COLORS = {
   BACKGROUND: '#f8f8f8',
   LIGHT_PURPLE: '#f2f3fe',
   WHITE: '#ffffff',
-  BLACK: '#5b67ce',
+  BLACK: '#050505',
 }

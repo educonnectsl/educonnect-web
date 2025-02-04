@@ -1,18 +1,27 @@
-import { Avatar, Box, Button, Card, CardContent, CardHeader, Divider, Grid2, Typography } from '@mui/material';
+import { Avatar, Box, Button, Card, CardContent, CardHeader, Chip, Divider, Grid2, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { stringAvatar } from '../../util/Utils';
 import DonationHistory from './DonationHistory';
-import DonationDialog from './DonationDialog';
+import EditDonationDialog from './EditDonationDialog';
+import ViewDonationDialog from './ViewDonationDialog';
 
 const ViewRequest = () => {
-  const [openDonationDialog, setOpenDonationDialog] = useState(false);
+  const [openEditDonationDialog, setOpenEditDonationDialog] = useState(false);
+  const [openViewDonationDialog, setOpenViewDonationDialog] = useState(false);
 
   const onDonateClick = () => {
-    setOpenDonationDialog(true);
+    setOpenEditDonationDialog(true);
+    setOpenViewDonationDialog(false);
   }
 
   const onDonationDialogClose = () => {
-    setOpenDonationDialog(false);
+    setOpenEditDonationDialog(false);
+    setOpenViewDonationDialog(false);
+  }
+
+  const onDonateHistoryEntryClick = () => {
+    setOpenEditDonationDialog(false);
+    setOpenViewDonationDialog(true);
   }
 
   return (
@@ -27,7 +36,7 @@ const ViewRequest = () => {
         </Grid2>
 
         <Grid2
-          size={{ xs: 8 }}
+          size={{ md: 8, xs: 12 }}
           sx={{ pl: 3, mb: 2 }}
         >
           <Typography variant='body1' sx={{ mb: 2, fontWeight: 'bold' }}>
@@ -62,26 +71,28 @@ const ViewRequest = () => {
             </Typography>
           </Box>
 
-          <DonationHistory />
+          <DonationHistory onEntryClick={onDonateHistoryEntryClick} />
         </Grid2>
 
         <Grid2
-          size={{ xs: 4 }}
+          size={{ md: 4, xs: 12 }}
           sx={{ pl: 3, pr: 3, mb: 2 }}
         >
           <Typography variant='body2' sx={{ mb: 0 }}>
             Cost estimation
           </Typography>
           <Typography variant='body2' sx={{ mb: 2 }}>
-            <span style={{ fontWeight: 'bold' }}>12,000 LKR</span> (5,000 LKR received)
+            <span style={{ fontWeight: 'bold' }}>12,000 LKR</span>
           </Typography>
 
-          <Typography variant='body2' sx={{ mb: 0 }}>
-            Status
+          <Typography component="div" variant='body2' sx={{ mb: 2 }}>
+            Status &nbsp;
+            <Chip label="PENDING" color="warning" variant="contined" size='small' />
+            {/* <Chip label="NEW" color="primary" variant="contined" size='small' />
+            <Chip label="COMPLETED" color="success" variant="contined" size='small' />
+            <Chip label="CANCELLED" color="error" variant="outlined" size='small' /> */}
           </Typography>
-          <Typography variant='body2' sx={{ mb: 2, fontWeight: 'bold' }}>
-            PENDING
-          </Typography>
+
 
           <Button
             sx={{ mb: 4 }}
@@ -101,20 +112,22 @@ const ViewRequest = () => {
               avatar={<Avatar {...stringAvatar('John Doe', 32)} />}
               title='John Doe'
               subheader="Principle"
+              sx={{ pb: 2 }}
             />
-            <CardContent>
+            <CardContent sx={{ pt: 0 }}>
               <Typography variant='body1'>
-                Location
+                School
               </Typography>
               <Typography variant='body2'>
-                Weligame, Southern Province
+                Akuressa Maha Vidyalaya
               </Typography>
             </CardContent>
           </Card>
         </Grid2>
       </Grid2>
 
-      <DonationDialog openDialog={openDonationDialog} onClose={onDonationDialogClose}/>
+      <EditDonationDialog openDialog={openEditDonationDialog} onClose={onDonationDialogClose} />
+      <ViewDonationDialog openDialog={openViewDonationDialog} onClose={onDonationDialogClose} />
     </>
   );
 };
