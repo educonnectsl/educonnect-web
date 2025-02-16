@@ -115,11 +115,18 @@ const ViewRequest = () => {
               sx={{ pb: 2 }}
             />
             <CardContent sx={{ pt: 0 }}>
-              <Typography variant='body1'>
-                School
+              <Typography variant='body2'>
+                School/Institute
+              </Typography>
+              <Typography variant='body2' sx={{ mb: 1 }}>
+                Akuressa Maha Vidyalaya
+              </Typography>
+
+              <Typography variant='body2'>
+                Contact
               </Typography>
               <Typography variant='body2'>
-                Akuressa Maha Vidyalaya
+                +94 93 360000
               </Typography>
             </CardContent>
           </Card>

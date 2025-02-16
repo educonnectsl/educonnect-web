@@ -1,7 +1,8 @@
 import { Button, Chip, Dialog, DialogActions, DialogContent, DialogTitle, Grid2, InputAdornment, TextField, Typography } from '@mui/material';
-import React from 'react';
+import React, { useRef } from 'react';
 
 export default function EditDonationDialog({ openDialog, onClose }) {
+  const fileInput = useRef();
 
   return (
     <Dialog
@@ -19,6 +20,8 @@ export default function EditDonationDialog({ openDialog, onClose }) {
 
       <DialogContent >
         <Grid2 container spacing={2}>
+          
+
           <Grid2 size={{ xs: 3 }} sx={{ my: 1 }}>
             <Typography variant='body2'>
               Title
@@ -69,7 +72,30 @@ export default function EditDonationDialog({ openDialog, onClose }) {
             />
           </Grid2>
 
-          {/* TODO: need file upload to prove the contribution */}
+          <Grid2 size={{ xs: 3 }} sx={{ mb: 1 }}>
+            <Typography variant='body2'>
+              Proof
+            </Typography>
+          </Grid2>
+          <Grid2 size={{ xs: 9 }} sx={{ mb: 1, display: "flex", justifyContent: "start" }}>
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => fileInput.current.click()}
+            >
+              Upload
+            </Button>
+            <input
+              ref={fileInput}
+              accept=".pdf,image/*,.csv"
+              type="file"
+              onChange={(e) => console.log(e.target.files[0])}
+              style={{ display: 'none' }}
+            />
+            <Typography variant='body2' sx={{ ml: 1, mb: 1 }}>
+              No file chosen
+            </Typography>
+          </Grid2>
 
           <Grid2 size={{ xs: 3 }}>
             <Typography variant='body2'>Created at</Typography>

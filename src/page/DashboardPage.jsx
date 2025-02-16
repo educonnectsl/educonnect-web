@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom';
 import Account from '../component/dashboard/Account';
 import DonorOverview from '../component/dashboard/DonorOverview';
 import DonorSettings from '../component/dashboard/DonorSettings';
-import SearchAndDonate from '../component/dashboard/SearchAndDonate';
 import SideBar from '../component/dashboard/SideBar';
 import { COLORS, PATHS } from '../util/Constant';
 import ViewRequest from '../component/dashboard/ViewRequest';
@@ -23,7 +22,6 @@ const DashboardPage = () => {
         <Routes>
           <Route index element={<DonorOverview />} />
           <Route path={PATHS.ACCOUNT} element={<Account />} />
-          <Route path={PATHS.SEARCH} element={<SearchAndDonate />} />
           <Route path={PATHS.SETTINGS} element={<DonorSettings />} />
           <Route path={PATHS.VIEW_REQUEST + PATHS.ID_PARAM} element={<ViewRequest />} />
         </Routes>

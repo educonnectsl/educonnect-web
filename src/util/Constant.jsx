@@ -10,7 +10,6 @@ export const PATHS = {
   ID_PARAM: "/:id",
 
   ACCOUNT: "/account",
-  SEARCH: "/search",
   SETTINGS: "/settings",
   VIEW_REQUEST: "/request",
 }

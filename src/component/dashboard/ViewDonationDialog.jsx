@@ -1,4 +1,5 @@
 import { Button, Chip, Dialog, DialogActions, DialogContent, DialogTitle, Grid2, Typography } from '@mui/material';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import React from 'react';
 
 export default function ViewDonationDialog({ openDialog, onClose }) {
@@ -48,7 +49,20 @@ export default function ViewDonationDialog({ openDialog, onClose }) {
             </Typography>
           </Grid2>
 
-          {/* TODO: show uploaded file here, link to download the attachment */}
+          <Grid2 size={{ xs: 3 }} sx={{ mb: 1 }}>
+            <Typography variant='body2'>Proof</Typography>
+          </Grid2>
+          <Grid2 size={{ xs: 9 }} sx={{ mb: 1 }}>
+            <Button
+
+              variant='outlined'
+              color='primary'
+              size='small'
+              startIcon={<FileDownloadOutlinedIcon />}
+            >
+              name_of_the_document.jpg
+            </Button>
+          </Grid2>
 
           <Grid2 size={{ xs: 3 }}>
             <Typography variant='body2'>Created at</Typography>

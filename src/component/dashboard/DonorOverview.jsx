@@ -1,9 +1,10 @@
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, Divider, Grid2, IconButton, InputBase, Paper, Typography } from '@mui/material';
-import React from 'react';
-import { COLORS, PATHS } from '../../util/Constant';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { COLORS, PATHS } from '../../util/Constant';
+import EditDonationDialog from './EditDonationDialog';
 
 const schoolResult = [
   {
@@ -65,115 +66,130 @@ const schoolResult = [
 
 const DonorOverview = () => {
   const navigate = useNavigate();
+  const [openDonateDialog, setOpenDonateDialog] = useState(false);
+
+  const onDonationDialogClose = () => {
+    setOpenDonateDialog(false);
+  };
+  
+  const onDonateClick = (index) => {
+    setOpenDonateDialog(true);
+  };
 
   return (
-    <Grid2 container spacing={2} maxWidth="lg">
-      <Grid2
-        size={{ xs: 12 }}
-        sx={{ px: 3, py: 1 }}
-      >
-        <Typography variant='h6'>Overview</Typography>
-        <Divider />
-      </Grid2>
-
-
-      <Grid2
-        size={{ xs: 12 }}
-        sx={{ mx: 2, mb: 2, borderRadius: 2, background: COLORS.WHITE, textAlign: 'center' }}
-      >
-        <Button
-          variant='text'
-          endIcon={<ArrowForwardIcon />}
-          size='large'
+    <>
+      <Grid2 container spacing={2} maxWidth="lg">
+        <Grid2
+          size={{ xs: 12 }}
+          sx={{ px: 2, py: 1 }}
         >
-          Complete your profile
-        </Button>
-      </Grid2>
+          <Typography variant='h6'>Overview</Typography>
+          <Divider />
+        </Grid2>
 
 
-      <Grid2
-        size={{ xs: 4 }}
-        sx={{ ml: 2, mb: 2 }}
-      >
-        <Paper sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}>
-          <Typography variant='h7'>Total donations made</Typography>
-          <Typography variant='h2' color={COLORS.PRIMARY}>__</Typography>
-        </Paper>
-      </Grid2>
-      <Grid2
-        size={{ xs: 4 }}
-        sx={{ mx: 2, mb: 2 }}
-      >
-        <Paper sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}>
-          <Typography variant='h7'>Number of schools supported</Typography>
-          <Typography variant='h2' color={COLORS.PRIMARY}>__</Typography>
-        </Paper>
-      </Grid2>
-
-
-      <Grid2
-        size={{ xs: 12 }}
-        sx={{ mx: 2, mb: 2 }}
-      >
-        <Typography variant='body1' sx={{ mb: 1 }}>Search schools</Typography>
-        <Box
-          sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}
+        <Grid2
+          size={{ xs: 12 }}
+          sx={{ mx: 2, mb: 4, borderRadius: 2, background: COLORS.WHITE, textAlign: 'center' }}
         >
-          <Typography variant='body2'>Find and support schools in need</Typography>
-          <Paper
-            component="form"
-            sx={{ my: 1, display: 'flex', alignItems: 'center', width: '50%', minWidth: '350px' }}
+          <Button
+            variant='text'
+            endIcon={<ArrowForwardIcon />}
+            size='large'
+            onClick={() => navigate(PATHS.DASHBOARD + PATHS.ACCOUNT)}
           >
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search schools"
-            />
-            <IconButton type="button" sx={{ p: '10px' }}>
-              <SearchIcon />
-            </IconButton>
+            Complete your profile
+          </Button>
+        </Grid2>
+
+
+        <Grid2
+          size={{ xs: 4 }}
+          sx={{ ml: 2, mb: 4 }}
+        >
+          <Paper sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}>
+            <Typography variant='h7'>Total donations made</Typography>
+            <Typography variant='h2' color={COLORS.PRIMARY}>__</Typography>
           </Paper>
-        </Box>
-      </Grid2>
+        </Grid2>
+        <Grid2
+          size={{ xs: 4 }}
+          sx={{ mx: 2, mb: 2 }}
+        >
+          <Paper sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}>
+            <Typography variant='h7'>Number of schools supported</Typography>
+            <Typography variant='h2' color={COLORS.PRIMARY}>__</Typography>
+          </Paper>
+        </Grid2>
 
 
-      <Grid2
-        size={{ xs: 12 }}
-        sx={{ mx: 2, mb: 2 }}
-      >
-        <Typography variant='body1' sx={{ mb: 1 }}>Recent help requests from schools</Typography>
-        <Grid2 container spacing={2}>
-          {schoolResult.map((school, index) => (
-            <Grid2
-              key={school.index}
-              size={{ xs: 12, md: 6, lg: 4 }}
-              component={Paper}
-              sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}
+        <Grid2
+          size={{ xs: 12 }}
+          sx={{ mx: 2, mb: 4 }}
+        >
+          <Typography variant='body1' sx={{ mb: 1 }}>Search schools</Typography>
+          <Box
+            sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}
+          >
+            <Typography variant='body2'>Find and support schools in need</Typography>
+            <Paper
+              component="form"
+              sx={{ my: 1, display: 'flex', alignItems: 'center', width: '50%', minWidth: '350px' }}
             >
-              <Typography
-                variant='body2'
-                sx={{ fontWeight: 'bold', mb: 2 }}
-              >{school.title}</Typography>
-              <Typography variant='body2'>{school.description}</Typography>
-              <Button
-                sx={{ mt: 2 }}
-                fullWidth
-                variant='contained'
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search schools"
+              />
+              <IconButton type="button" sx={{ p: '10px' }}>
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+          </Box>
+        </Grid2>
+
+
+        <Grid2
+          size={{ xs: 12 }}
+          sx={{ mx: 2, mb: 2 }}
+        >
+          <Typography variant='body1' sx={{ mb: 1 }}>Recent help requests from schools</Typography>
+          <Grid2 container spacing={2}>
+            {schoolResult.map((school, index) => (
+              <Grid2
+                key={school.index}
+                size={{ xs: 12, md: 6, lg: 4 }}
+                component={Paper}
+                sx={{ p: 2, borderRadius: 2, background: COLORS.WHITE }}
               >
-                Donate
-              </Button>
-              <Button
-                sx={{ mt: 1 }}
-                fullWidth
-                variant='outlined'
-                onClick={() => navigate(PATHS.DASHBOARD + PATHS.VIEW_REQUEST +  "/" + school.index)}
-              >
-                View
-              </Button>
-            </Grid2>
-          ))}
+                <Typography
+                  variant='body2'
+                  sx={{ fontWeight: 'bold', mb: 2 }}
+                >{school.title}</Typography>
+                <Typography variant='body2'>{school.description}</Typography>
+                <Button
+                  sx={{ mt: 2 }}
+                  fullWidth
+                  variant='contained'
+                  onClick={() => onDonateClick(school.index)}
+                >
+                  Donate
+                </Button>
+                <Button
+                  sx={{ mt: 1 }}
+                  fullWidth
+                  variant='outlined'
+                  onClick={() => navigate(PATHS.DASHBOARD + PATHS.VIEW_REQUEST + "/" + school.index)}
+                >
+                  View
+                </Button>
+              </Grid2>
+            ))}
+          </Grid2>
         </Grid2>
       </Grid2>
-    </Grid2>
+
+      <EditDonationDialog openDialog={openDonateDialog} onClose={onDonationDialogClose} />
+    </>
   );
 };
 
