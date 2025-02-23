@@ -1,6 +1,7 @@
 import { Box, Grid2, Paper, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { COLORS } from '../../util/Constant';
+import '../../styles/how-it-works.scss';
 
 const paperContent = [
   {
@@ -37,44 +38,47 @@ const HowItWorks = () => {
           HOW IT ALL WORKS?
         </Typography>
         <Typography variant='p' align='center'>
-          See how EduConnectSL bridges the gap between schools in need and compassionate donors. 
+          See how EduConnectSL bridges the gap between schools in need and compassionate donors.
           Our platform provides transparent information, empowering donors to make informed decisions and support the schools that need it most.
         </Typography>
 
         {
           paperContent.map((content, index) => (
-            <Paper
-              key={content.step}
-              elevation={1}
-              square={false}
-              variant='elevation'
-              sx={{ mt: 4, borderRadius: 2, width: '80%' }}
-            >
-              <Grid2 container spacing={0}>
-                <Grid2 size={{ xs: 12, md: 6 }}>
-                  <Box sx={{ m: 5, p: 2 }}>
-                    <Typography sx={{ mt: 4, mb: 2, color: COLORS.PRIMARY }} variant='body1'>
-                      {content.step}
-                    </Typography>
-                    <Typography variant='h5'>
-                      {content.title}
-                    </Typography>
-                    <Typography sx={{ mb: 4 }} variant='p'>
-                      {content.description}
-                    </Typography>
-                  </Box>
+            <div className='sticky-card-container'>
+              <Paper
+                className='sticky-card'
+                key={content.step}
+                elevation={1}
+                square={false}
+                variant='elevation'
+                sx={{ mt: 4, borderRadius: 2, width: '80%' }}
+              >
+                <Grid2 sx={{height:'400px'}} container spacing={0}>
+                  <Grid2 size={{ xs: 12, md: 6 }}>
+                    <Box sx={{ m: 5, p: 2 }}>
+                      <Typography sx={{ mt: 4, color: COLORS.PRIMARY, fontWeight: '600' }} variant='body1'>
+                        {content.step}
+                      </Typography>
+                      <Typography sx={{ mb: 4, fontWeight: '600' }} variant='h4'>
+                        {content.title}
+                      </Typography>
+                      <Typography sx={{ mb: 4 }} variant='p'>
+                        {content.description}
+                      </Typography>
+                    </Box>
+                  </Grid2>
+                  <Grid2 size={{ xs: 0, md: 6 }} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{
+                      width: '100%',
+                      height: '100%',
+                      backgroundImage: `url(${content.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'right',
+                    }} />
+                  </Grid2>
                 </Grid2>
-                <Grid2 size={{ xs: 0, md: 6 }} sx={{ display: { xs: 'none', md: 'flex' } }}>
-                  <Box sx={{
-                    width: '100%',
-                    height: '100%',
-                    backgroundImage: `url(${content.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'right',
-                  }} />
-                </Grid2>
-              </Grid2>
-            </Paper>
+              </Paper>
+            </div>
           ))
         }
       </Stack>
