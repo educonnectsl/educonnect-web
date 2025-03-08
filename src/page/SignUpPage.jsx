@@ -13,6 +13,9 @@ const SignUpPage = () => {
 
   const handleSignUpOnClick = () => {
     navigate(PATHS.DASHBOARD);
+
+    setSignUpType('sdf');
+    console.log(signUpType);
   };
 
   return (
