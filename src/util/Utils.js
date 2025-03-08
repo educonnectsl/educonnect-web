@@ -1,5 +1,3 @@
-import { WidthFull } from "@mui/icons-material";
-import { fontSize } from "@mui/system";
 
 export const stringToColor = (string) => {
   let hash = 0;
