@@ -1,135 +1,295 @@
-import GoogleIcon from '@mui/icons-material/Google';
-import { Box, Button, Container, Divider, Grid2, Link, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import GoogleIcon from "@mui/icons-material/Google";
+import { Box, Button, Container, Divider, Grid2, Link, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import React, { useState } from "react";
-import Header from '../component/Header';
-import { COLORS, PATHS } from '../util/Constant';
-import { useNavigate } from 'react-router-dom';
+import Header from "../component/Header";
+import { COLORS, PATHS } from "../util/Constant";
+import { useNavigate } from "react-router-dom";
+import api from "../services/api";
+import CustomSnackbar from "../component/CustomSnackbar";
+import useSnackbar from "../hooks/useSnackbar";
 
-const SIGNUP_TYPE = { TEACHER: 'Teacher', DONOR: 'Donor' };
+const SIGNUP_TYPE = { TEACHER: "Teacher", DONOR: "Donor" };
 
 const SignUpPage = () => {
-  const [signUpType, setSignUpType] = useState(undefined);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    userType: SIGNUP_TYPE.TEACHER,
+  });
+  const [errors, setErrors] = useState({});
+  const { snackBarState, showSnackbar, hideSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
-  const handleSignUpOnClick = () => {
-    navigate(PATHS.DASHBOARD);
+  const validatePassword = (value) => {
+    if (value.length < 8) return "Password must be at least 8 characters long";
+    if (!/\d/.test(value)) return "Password must contain at least one number";
+    if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter";
+    return "";
+  };
 
-    setSignUpType('sdf');
-    console.log(signUpType);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleUserTypeChange = (event, newValue) => {
+    setFormData((prev) => ({
+      ...prev,
+      userType: newValue,
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    else {
+      const pwdError = validatePassword(formData.password);
+      if (pwdError) newErrors.password = pwdError;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+    if (!formData.userType) newErrors.userType = "Please select user type";
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      return true;
+    } else {
+      showSnackbar(Object.values(newErrors).join(", "), "error");
+      return false;
+    }
+  };
+
+  const handleSignUpOnClick = async () => {
+    const timeStamp = new Date().getMilliseconds();
+    if (validateForm()) {
+      try {
+        const payload = {
+          email: formData.email,
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          password: formData.password,
+          location: "",
+          contact_no: "",
+          user_type: formData.userType,
+          user_state: "Complete",
+          facebook_id: timeStamp.toString(),
+          google_id: timeStamp.toString()
+        };
+        const response = await api.post("/users", payload);
+        if (response.data.access_token && response.data.refresh_token) {
+          localStorage.setItem("access_token", response.data.access_token);
+          localStorage.setItem("refresh_token", response.data.refresh_token);
+        }
+        navigate(PATHS.DASHBOARD);
+      } catch (error) {
+        console.error("Signup failed", error);
+        showSnackbar(error.response.data, "error");
+      }
+    }
   };
 
   return (
     <>
-      <Header position='absolute' />
+      <Header position="absolute" />
+      <Container maxWidth="md" sx={{ p: 2, minWidth: 720 }}>
+        <CustomSnackbar
+          open={snackBarState.open}
+          message={snackBarState.message}
+          status={snackBarState.status}
+          onClose={hideSnackbar}
+          autoHideDuration={snackBarState.autoHideDuration}
+        />
 
-      <Container maxWidth='md' sx={{ p: 2, minWidth: 720 }}>
-        <Grid2 container spacing={1} sx={{ m: 4, p: 2, backgroundColor: COLORS.LIGHT_GRAY }}>
-          <Grid2 size={{ xs: 0, md: 4, display: { xs: 'none', md: 'flex' } }}>
-            <Box sx={{
-              height: '100%',
-              width: '100%',
-              borderRadius: 2,
-              backgroundImage: 'url(signup.jpg)',
-              backgroundSize: 'cover'
-            }} />
+        <Grid2
+          container
+          spacing={1}
+          sx={{ m: 4, p: 2, backgroundColor: COLORS.LIGHT_GRAY }}
+        >
+          <Grid2 size={{ xs: 0, md: 4, display: { xs: "none", md: "flex" } }}>
+            <Box
+              sx={{
+                height: "100%",
+                width: "100%",
+                borderRadius: 2,
+                backgroundImage: "url(signup.jpg)",
+                backgroundSize: "cover",
+              }}
+            />
           </Grid2>
 
-          <Grid2 size={{ xs: 12, md: 8 }} sx={{ backgroundColor: 'white', borderRadius: 2 }}>
-            <Box sx={{ height: '100%' }}>
-
-              <Grid2 container spacing={0} direction='row' sx={{ p: 2 }}>
+          <Grid2
+            size={{ xs: 12, md: 8 }}
+            sx={{ backgroundColor: "white", borderRadius: 2 }}
+          >
+            <Box sx={{ height: "100%" }}>
+              <Grid2 container spacing={0} direction="row" sx={{ p: 2 }}>
                 <Grid2 size={12} sx={{ mt: 2, mb: 6, mx: 6 }}>
                   <Box>
-                    <Typography variant='h4' align='center'>Create an account</Typography>
+                    <Typography variant="h4" align="center">
+                      Create an account
+                    </Typography>
                   </Box>
                   <Box>
-                    <Typography variant='body1' align='center'>Please enter your details</Typography>
+                    <Typography variant="body1" align="center">
+                      Please enter your details
+                    </Typography>
                   </Box>
                 </Grid2>
 
-                <Grid2 size={12} sx={{ mt: 0, mb: 4, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={12}
+                  sx={{ mt: 0, mb: 4, mx: 6, display: "flex", justifyContent: "center" }}
+                >
                   <ToggleButtonGroup
-                    sx={{ width: '80%', justifyContent: 'center' }}
+                    sx={{ width: "80%", justifyContent: "center" }}
                     exclusive
+                    value={formData.userType}
+                    onChange={handleUserTypeChange}
                   >
-                    <ToggleButton sx={{ width: '50%' }} value={SIGNUP_TYPE.TEACHER}>
+                    <ToggleButton sx={{ width: "50%" }} value={SIGNUP_TYPE.TEACHER} >
                       {SIGNUP_TYPE.TEACHER}
                     </ToggleButton>
-                    <ToggleButton sx={{ width: '50%' }} value={SIGNUP_TYPE.DONOR}>
+                    <ToggleButton sx={{ width: "50%" }} value={SIGNUP_TYPE.DONOR} >
                       {SIGNUP_TYPE.DONOR}
                     </ToggleButton>
                   </ToggleButtonGroup>
                 </Grid2>
 
-                <Grid2 size={6} sx={{ mt: 0, mb: 2, pl: 6, pr: 1, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={6}
+                  sx={{ mt: 0, mb: 2, pl: 6, pr: 1, display: "flex", justifyContent: "center" }}
+                >
                   <TextField
-                    label='First name'
-                    variant='outlined'
+                    name="firstName"
+                    label="First name"
+                    variant="outlined"
                     required
-                    size='small'
-                    sx={{ width: '100%' }}
+                    size="small"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    error={!!errors.firstName}
+                    helperText={errors.firstName}
+                    sx={{ width: "100%" }}
                   />
                 </Grid2>
-                <Grid2 size={6} sx={{ mt: 0, mb: 2, pl: 1, pr: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={6}
+                  sx={{ mt: 0, mb: 2, pl: 1, pr: 6, display: "flex", justifyContent: "center" }}
+                >
                   <TextField
-                    label='Last name'
-                    variant='outlined'
-                    size='small'
-                    sx={{ width: '100%' }}
+                    required
+                    name="lastName"
+                    label="Last name"
+                    variant="outlined"
+                    size="small"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    error={!!errors.lastName}
+                    helperText={errors.lastName}
+                    sx={{ width: "100%" }}
                   />
                 </Grid2>
 
-                <Grid2 size={12} sx={{ mt: 0, mb: 2, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={12}
+                  sx={{ mt: 0, mb: 2, mx: 6, display: "flex", justifyContent: "center" }}
+                >
                   <TextField
-                    label='Email'
-                    variant='outlined'
+                    name="email"
+                    label="Email"
+                    variant="outlined"
                     required
-                    type='email'
-                    size='small'
-                    sx={{ width: '100%' }}
+                    type="email"
+                    size="small"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    error={!!errors.email}
+                    helperText={errors.email}
+                    sx={{ width: "100%" }}
                   />
                 </Grid2>
 
-                <Grid2 size={12} sx={{ mt: 0, mb: 2, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={12}
+                  sx={{ mt: 0, mb: 2, mx: 6, display: "flex", justifyContent: "center" }}
+                >
                   <TextField
-                    label='Password'
-                    variant='outlined'
+                    name="password"
+                    label="Password"
+                    variant="outlined"
                     required
-                    type='password'
-                    size='small'
-                    sx={{ width: '100%' }}
+                    type="password"
+                    size="small"
+                    value={formData.password}
+                    onChange={(e) => {
+                      handleInputChange(e);
+                      const pwdMsg = validatePassword(e.target.value);
+                      setErrors((prev) => ({ ...prev, password: pwdMsg }));
+                    }}
+                    error={!!errors.password}
+                    helperText={errors.password}
+                    sx={{ width: "100%" }}
                   />
                 </Grid2>
 
-                <Grid2 size={12} sx={{ mt: 0, mb: 4, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={12}
+                  sx={{ mt: 0, mb: 4, mx: 6, display: "flex", justifyContent: "center" }}
+                >
                   <TextField
-                    label='Confirm password'
-                    variant='outlined'
+                    name="confirmPassword"
+                    label="Confirm password"
+                    variant="outlined"
                     required
-                    type='password'
-                    size='small'
-                    sx={{ width: '100%' }}
+                    type="password"
+                    size="small"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword}
+                    sx={{ width: "100%" }}
                   />
                 </Grid2>
 
-                <Grid2 size={12} sx={{ mt: 0, mb: 0, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={12}
+                  sx={{ mt: 0, mb: 0, mx: 6, display: "flex", justifyContent: "center" }}
+                >
                   <Button
-                    variant='contained'
-                    size='small'
-                    sx={{ width: '100%' }}
+                    variant="contained"
+                    size="small"
+                    sx={{ width: "100%" }}
                     onClick={handleSignUpOnClick}
                   >
                     Create an account
                   </Button>
                 </Grid2>
-                <Grid2 size={12} sx={{ mt: 0, mb: 0, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={12}
+                  sx={{ mt: 0, mb: 0, mx: 6, display: "flex", justifyContent: "center" }}
+                >
                   <Divider>or</Divider>
                 </Grid2>
-                <Grid2 size={12} sx={{ mt: 0, mb: 4, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2
+                  size={12}
+                  sx={{ mt: 0, mb: 4, mx: 6, display: "flex", justifyContent: "center" }}
+                >
                   <Button
-                    variant='outlined'
-                    size='small'
-                    sx={{ width: '100%', textTransform: 'none' }}
+                    variant="outlined"
+                    size="small"
+                    sx={{ width: "100%", textTransform: "none" }}
                     onClick={handleSignUpOnClick}
                   >
                     <GoogleIcon sx={{ width: 15, height: 15, mx: 1 }} />
@@ -137,10 +297,12 @@ const SignUpPage = () => {
                   </Button>
                 </Grid2>
 
-                <Grid2 size={12} sx={{ mt: 0, mb: 2, mx: 6, height: 'auto' }}>
-                  <Typography variant='body1' align='center'>
+                <Grid2 size={12} sx={{ mt: 0, mb: 2, mx: 6, height: "auto" }}>
+                  <Typography variant="body1" align="center">
                     Already have an account?&nbsp;
-                    <Link href='/login' variant='inherit' underline='hover'>Login</Link>
+                    <Link href="/login" variant="inherit" underline="hover">
+                      Login
+                    </Link>
                   </Typography>
                 </Grid2>
               </Grid2>
