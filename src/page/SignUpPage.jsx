@@ -72,7 +72,7 @@ const SignUpPage = () => {
   };
 
   const handleSignUpOnClick = async () => {
-    const timeStamp = new Date().getMilliseconds();
+    const timeStamp = Date.now();
     if (validateForm()) {
       try {
         const payload = {
