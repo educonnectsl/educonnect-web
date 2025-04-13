@@ -2,11 +2,13 @@ import { Box, Container } from '@mui/material';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import DonorAccount from '../component/dashboard/donor/DonorAccount';
-import DonorOverview from '../component/dashboard/DonorOverview';
+import DonorOverview from '../component/dashboard/donor/DonorOverview';
+import ViewRequest from '../component/dashboard/donor/ViewRequest';
 import SideNavigation from '../component/dashboard/SideNavigation';
 import TeacherAccount from '../component/dashboard/teacher/TeacherAccount';
-import ViewRequest from '../component/dashboard/ViewRequest';
+import TeacherOverview from '../component/dashboard/teacher/TeacherOverview';
 import { COLORS, PATHS, USER_ROLES } from '../util/Constant';
+import UpdateRequest from '../component/dashboard/teacher/UpdateRequest';
 
 const userRole = USER_ROLES.TEACHER; // This should be dynamically set based on the logged-in user
 
@@ -37,15 +39,16 @@ const DashboardPage = () => {
             <>
               <Route index element={<DonorOverview />} />
               <Route path={PATHS.ACCOUNT} element={<DonorAccount />} />
+              <Route path={PATHS.VIEW_REQUEST + PATHS.ID_PARAM} element={<ViewRequest />} />
             </>
           )}
           {userRole === USER_ROLES.TEACHER && (
             <>
-              <Route index element={<DonorOverview />} />
+              <Route index element={<TeacherOverview />} />
               <Route path={PATHS.ACCOUNT} element={<TeacherAccount />} />
+              <Route path={PATHS.VIEW_REQUEST + PATHS.ID_PARAM} element={<UpdateRequest />} />
             </>
           )}
-          <Route path={PATHS.VIEW_REQUEST + PATHS.ID_PARAM} element={<ViewRequest />} />
         </Routes>
       </Box>
     </Container>
