@@ -62,6 +62,17 @@ const TeacherOverview = () => {
           </Button>
         </Grid2>
 
+        <Grid2 size={{ xs: 12 }} sx={{ mx: 2, mb: 2 }}>
+          <Button 
+            variant='contained' 
+            color='primary' 
+            size='small'
+            onClick={() => navigate(PATHS.DASHBOARD + PATHS.VIEW_REQUEST + "/0")}
+          >
+            Create new request
+          </Button>
+        </Grid2>
+
 
         <Grid2
           size={{ xs: 12 }}
@@ -83,14 +94,6 @@ const TeacherOverview = () => {
                   sx={{ fontWeight: 'bold', mb: 2 }}
                 >{school.title}</Typography>
                 <Typography variant='body2'>{school.description}</Typography>
-                <Button
-                  sx={{ mt: 2 }}
-                  fullWidth
-                  variant='contained'
-                  onClick={() => onDonateClick(school.index)}
-                >
-                  Donate
-                </Button>
                 <Button
                   sx={{ mt: 1 }}
                   fullWidth

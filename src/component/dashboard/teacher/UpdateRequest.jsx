@@ -84,7 +84,7 @@ const UpdateRequest = () => {
             size='small'
             slotProps={{
               input: {
-                endAdornment: <InputAdornment position="end">LKR</InputAdornment>,
+                endAdornment: <InputAdornment position="end">LKR</InputAdornment>
               }
             }}
           />
@@ -107,20 +107,17 @@ const UpdateRequest = () => {
           </Select>
         </Grid2>
 
-        <Grid2 size={{ xs: 12 }} sx={{ ml: 2, mb: 3 }}>
-          <Button variant='contained' color='primary' size='small'>
-            Save
-          </Button>
-        </Grid2>
-
-
-        <Grid2 size={{ xs: 12 }} sx={{ px: 2, py: 1 }}>
-          <Typography variant='h6'>Donation History</Typography>
-          <Divider />
-        </Grid2>
-
-        <Grid2 size={{ md: 9, xs: 12 }} sx={{ ml: 2, mb: 3 }}>
+        <Grid2 size={{ md: 9, xs: 12 }} sx={{ ml: 2, my: 3 }}>
           <DonationHistory onEntryClick={onDonateHistoryEntryClick} />
+        </Grid2>
+
+        <Grid2 size={{ xs: 12 }} sx={{ ml: 2, mb: 3 }}>
+          <Button variant='contained' color='primary' size='small' sx={{ mr: 2 }}>
+            Update
+          </Button>
+          <Button variant='outlined' color='warning' size='small' sx={{ mr: 2 }}>
+            Cancel
+          </Button>
         </Grid2>
 
       </Grid2>
