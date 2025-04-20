@@ -33,9 +33,3 @@ export const COLORS = {
   WHITE: '#ffffff',
   BLACK: '#050505',
 }
-
-export const USER_ROLES = {
-  DONOR: 'donor',
-  TEACHER: 'teacher',
-  ADMIN: 'admin',
-}

@@ -7,12 +7,13 @@ import ViewRequest from '../component/dashboard/donor/ViewRequest';
 import SideNavigation from '../component/dashboard/SideNavigation';
 import TeacherAccount from '../component/dashboard/teacher/TeacherAccount';
 import TeacherOverview from '../component/dashboard/teacher/TeacherOverview';
-import { COLORS, PATHS, USER_ROLES } from '../util/Constant';
+import { COLORS, PATHS, USER_TYPES } from '../util/Constant';
 import UpdateRequest from '../component/dashboard/teacher/UpdateRequest';
+import { useAuth } from '../context/AuthContext';
 
-const userRole = USER_ROLES.TEACHER; // This should be dynamically set based on the logged-in user
 
 const DashboardPage = () => {
+const userRole = useAuth().user?.user_type;
   return (
     <Container
       maxWidth={false}
@@ -35,14 +36,14 @@ const DashboardPage = () => {
         }}
       >
         <Routes>
-          {userRole === USER_ROLES.DONOR && (
+          {userRole === USER_TYPES.DONOR && (
             <>
               <Route index element={<DonorOverview />} />
               <Route path={PATHS.ACCOUNT} element={<DonorAccount />} />
               <Route path={PATHS.VIEW_REQUEST + PATHS.ID_PARAM} element={<ViewRequest />} />
             </>
           )}
-          {userRole === USER_ROLES.TEACHER && (
+          {userRole === USER_TYPES.TEACHER && (
             <>
               <Route index element={<TeacherOverview />} />
               <Route path={PATHS.ACCOUNT} element={<TeacherAccount />} />
