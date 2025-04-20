@@ -1,9 +1,9 @@
 import { Avatar, Box, Button, Card, CardContent, CardHeader, Chip, Divider, Grid2, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { stringAvatar } from '../../util/Utils';
-import DonationHistory from './DonationHistory';
-import EditDonationDialog from './EditDonationDialog';
-import ViewDonationDialog from './ViewDonationDialog';
+import { stringAvatar } from '../../../util/Utils';
+import DonationHistory from '../DonationHistory';
+import EditDonationDialog from '../EditDonationDialog';
+import ViewDonationDialog from '../ViewDonationDialog';
 
 const ViewRequest = () => {
   const [openEditDonationDialog, setOpenEditDonationDialog] = useState(false);

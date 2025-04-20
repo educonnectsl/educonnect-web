@@ -3,8 +3,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, Divider, Grid2, IconButton, InputBase, Paper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { COLORS, PATHS } from '../../util/Constant';
-import EditDonationDialog from './EditDonationDialog';
+import { COLORS, PATHS } from '../../../util/Constant';
+import EditDonationDialog from '../EditDonationDialog';
 
 const schoolResult = [
   {
@@ -71,7 +71,7 @@ const DonorOverview = () => {
   const onDonationDialogClose = () => {
     setOpenDonateDialog(false);
   };
-  
+
   const onDonateClick = (index) => {
     setOpenDonateDialog(true);
   };

@@ -2,9 +2,13 @@ export const PATHS = {
   HOME: "/",
   LOGIN: "/login",
   SIGN_UP: "/signup",
-  DASHBOARD: "/dashboard",
   ERROR: "/error",
   WILDCARD: "/*",
+
+  DONOR: "/donor",
+  TEACHER: "/teacher",
+
+  DASHBOARD: "/dashboard",
 
   WILD_CARD: "/*",
   ID_PARAM: "/:id",
@@ -21,11 +25,17 @@ export const USER_TYPES = {
 }
 
 export const COLORS = {
-  PRIMARY: '#7d83f3',
-  SECONDARY: '#e9eaff',
-  LIGHT_GRAY: '#f0f0f0',
+  PRIMARY: '#9370DB',
+  SECONDARY: '#E6E6FA',
+  LIGHT_GRAY: '#ddddf0',
   BACKGROUND: '#f8f8f8',
   LIGHT_PURPLE: '#f2f3fe',
   WHITE: '#ffffff',
   BLACK: '#050505',
+}
+
+export const USER_ROLES = {
+  DONOR: 'donor',
+  TEACHER: 'teacher',
+  ADMIN: 'admin',
 }
