@@ -1,10 +1,12 @@
 import { Button, Divider, Grid2, TextField, Typography } from '@mui/material';
 
 import React from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 const textFieldStyle = { width: { xs: '80%', md: '60%', lg: '40%' } };
 
 const Account = () => {
+    const { user } = useAuth();
   return (
     <Grid2 container spacing={2} maxWidth="lg">
       <Grid2 size={{ xs: 12 }} sx={{ px: 2, py: 1 }}>
@@ -16,7 +18,7 @@ const Account = () => {
         <Typography variant='body2'>Account type</Typography>
       </Grid2>
       <Grid2 size={{ md: 9, xs: 12 }} sx={{ ml: 2 }}>
-        <Typography variant='body2'>Donor</Typography>
+        <Typography variant='body2'>{user.user_type}</Typography>
       </Grid2>
 
       <Grid2 size={{ md: 2, xs: 12 }} sx={{ ml: 2 }}>
