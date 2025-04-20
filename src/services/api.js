@@ -42,7 +42,6 @@ api.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${access_token}`;
         return api(originalRequest);
       } catch (err) {
-        // refresh token failed: remove tokens
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         return Promise.reject(err);

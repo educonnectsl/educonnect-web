@@ -14,6 +14,12 @@ export const PATHS = {
   VIEW_REQUEST: "/request",
 }
 
+export const USER_TYPES = {
+  TEACHER: "Teacher",
+  DONOR: "Donor",
+  ADMIN: "Admin"
+}
+
 export const COLORS = {
   PRIMARY: '#7d83f3',
   SECONDARY: '#e9eaff',
