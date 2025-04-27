@@ -2,11 +2,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './page/HomePage';
 import LoginPage from './page/LoginPage';
 import SignUpPage from './page/SignUpPage';
-import { COLORS, PATHS } from './util/Constant';
+import { COLORS, PATHS, USER_TYPES } from './util/Constant';
 import DashboardPage from './page/DashboardPage';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './component/PrivateRoute';
 
 function App() {
-
   return (
     <div className="app" style={{
       display: 'flex',
@@ -17,12 +18,21 @@ function App() {
       backgroundColor: COLORS.BACKGROUND
     }}>
       <BrowserRouter>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path={PATHS.LOGIN} element={<LoginPage />} />
-          <Route path={PATHS.SIGN_UP} element={<SignUpPage />} />
-          <Route path={PATHS.DASHBOARD + PATHS.WILD_CARD} element={<DashboardPage />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path={PATHS.LOGIN} element={<LoginPage />} />
+            <Route path={PATHS.SIGN_UP} element={<SignUpPage />} />
+            <Route
+              path={PATHS.DASHBOARD + PATHS.WILD_CARD}
+              element={
+                <PrivateRoute allowedUserTypes={[USER_TYPES.ADMIN, USER_TYPES.TEACHER, USER_TYPES.DONOR]}>
+                  <DashboardPage />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

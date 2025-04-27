@@ -1,21 +1,39 @@
 import GoogleIcon from '@mui/icons-material/Google';
 import { Box, Button, Container, Divider, Grid2, Link, TextField, Typography } from '@mui/material';
-import React from "react";
+import React, { useState } from "react";
 import Header from '../component/Header';
 import { COLORS, PATHS } from '../util/Constant';
 import { useNavigate } from 'react-router-dom';
+import useSnackbar from '../hooks/useSnackbar';
+import CustomSnackbar from '../component/CustomSnackbar';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
+  const { snackBarState, showSnackbar, hideSnackbar } = useSnackbar();
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleLoginOnClick = () => {
-    navigate(PATHS.DASHBOARD);
+  const handleLoginOnClick = async () => {
+    try {
+      await login(email, password);
+      navigate(PATHS.DASHBOARD);
+    } catch (error) {
+      showSnackbar(error.response?.data || error.message, "error");
+    }
   };
 
   return (
     <>
       <Header position='absolute' />
-
+      <CustomSnackbar
+        open={snackBarState.open}
+        message={snackBarState.message}
+        status={snackBarState.status}
+        onClose={hideSnackbar}
+        autoHideDuration={snackBarState.autoHideDuration}
+      />
       <Container maxWidth='md' sx={{ p: 2, minWidth: 720 }}>
         <Grid2 container spacing={1} sx={{ m: 4, p: 2, backgroundColor: COLORS.LIGHT_GRAY }}>
           <Grid2 size={{ xs: 0, md: 5, display: { xs: 'none', md: 'flex' } }}>
@@ -48,6 +66,8 @@ const LoginPage = () => {
                     required
                     type='email'
                     size='small'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     sx={{ width: '100%' }}
                   />
                 </Grid2>
@@ -59,6 +79,10 @@ const LoginPage = () => {
                     required
                     type='password'
                     size='small'
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                     sx={{ width: '100%' }}
                   />
                 </Grid2>
