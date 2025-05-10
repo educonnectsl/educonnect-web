@@ -1,9 +1,9 @@
 import GoogleIcon from "@mui/icons-material/Google";
-import { Box, Button, Container, Divider, Grid2, Link, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, FormControlLabel, Grid2, Link, Radio, RadioGroup, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Header from "../component/Header";
 import { COLORS, PATHS } from "../util/Constant";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import CustomSnackbar from "../component/CustomSnackbar";
 import useSnackbar from "../hooks/useSnackbar";
@@ -39,6 +39,7 @@ const SignUpPage = () => {
   };
 
   const handleUserTypeChange = (event, newValue) => {
+    console.log("User type changed to:", event.target.value);
     setFormData((prev) => ({
       ...prev,
       userType: newValue,
@@ -152,19 +153,23 @@ const SignUpPage = () => {
                   size={12}
                   sx={{ mt: 0, mb: 4, mx: 6, display: "flex", justifyContent: "center" }}
                 >
-                  <ToggleButtonGroup
-                    sx={{ width: "80%", justifyContent: "center" }}
-                    exclusive
+                  <RadioGroup
+                    row
+                    defaultValue={SIGNUP_TYPE.TEACHER}
                     value={formData.userType}
                     onChange={handleUserTypeChange}
                   >
-                    <ToggleButton sx={{ width: "50%" }} value={SIGNUP_TYPE.TEACHER} >
-                      {SIGNUP_TYPE.TEACHER}
-                    </ToggleButton>
-                    <ToggleButton sx={{ width: "50%" }} value={SIGNUP_TYPE.DONOR} >
-                      {SIGNUP_TYPE.DONOR}
-                    </ToggleButton>
-                  </ToggleButtonGroup>
+                    <FormControlLabel
+                        value={SIGNUP_TYPE.TEACHER}
+                        control={<Radio />}
+                        label={SIGNUP_TYPE.TEACHER}
+                    />
+                    <FormControlLabel
+                        value={SIGNUP_TYPE.DONOR}
+                        control={<Radio />}
+                        label={SIGNUP_TYPE.DONOR}
+                    />
+                  </RadioGroup>
                 </Grid2>
 
                 <Grid2
