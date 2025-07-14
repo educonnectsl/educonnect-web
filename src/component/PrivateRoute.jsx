@@ -6,6 +6,7 @@ const PrivateRoute = ({ children, allowedUserTypes = [] }) => {
     const { user } = useAuth();
     
     if (!user) {
+        console.log("User is not authenticated");
         return <Navigate to="/login" />;
     }
     

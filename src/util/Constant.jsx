@@ -24,6 +24,13 @@ export const USER_TYPES = {
   ADMIN: "Admin"
 }
 
+export const SCHOOL_POSITIONS = {
+  TEACHER: "Teacher",
+  PRINCIPAL: "Principal",
+  ADMINISTRATOR: "Administrator",
+  OTHER: "Other"
+}
+
 export const COLORS = {
   PRIMARY: '#9370DB',
   SECONDARY: '#E6E6FA',

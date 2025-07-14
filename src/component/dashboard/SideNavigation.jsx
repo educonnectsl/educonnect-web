@@ -1,18 +1,18 @@
 import { Menu } from '@mui/icons-material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import {
   Box,
   Drawer,
   IconButton,
-  List, ListItem, ListItemIcon,
+  List, ListItemButton, ListItemIcon,
   ListItemText, Toolbar,
   useMediaQuery,
   useTheme
 } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { COLORS, PATHS } from '../../util/Constant';
 
@@ -82,7 +82,7 @@ const SideNavigation = () => {
       </Toolbar>
 
       <List>
-        <ListItem button
+        <ListItemButton
           onClick={() => navigate(PATHS.DASHBOARD)}
           sx={getButtonStyle(PATHS.DASHBOARD)}
         >
@@ -90,9 +90,9 @@ const SideNavigation = () => {
             <GridViewOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
-        </ListItem>
+        </ListItemButton>
 
-        <ListItem button
+        <ListItemButton
           onClick={() => navigate(PATHS.DASHBOARD + PATHS.ACCOUNT)}
           sx={getButtonStyle(PATHS.DASHBOARD + PATHS.ACCOUNT)}
         >
@@ -100,9 +100,9 @@ const SideNavigation = () => {
             <PermIdentityIcon />
           </ListItemIcon>
           <ListItemText primary="Account" />
-        </ListItem>
+        </ListItemButton>
 
-        <ListItem button
+        <ListItemButton
           onClick={() => navigate(PATHS.HOME)}
           sx={getButtonStyle(PATHS.HOME)}
         >
@@ -110,7 +110,7 @@ const SideNavigation = () => {
             <LogoutIcon />
           </ListItemIcon>
           <ListItemText primary="Logout" />
-        </ListItem>
+        </ListItemButton>
       </List>
     </Drawer>
   );

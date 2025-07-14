@@ -1,12 +1,11 @@
-import GoogleIcon from '@mui/icons-material/Google';
-import { Box, Button, Container, Divider, Grid2, Link, TextField, Typography } from '@mui/material';
-import React, { useState } from "react";
-import Header from '../component/Header';
-import { COLORS, PATHS } from '../util/Constant';
+import { Box, Button, Container, Grid2, Link, TextField, Typography } from '@mui/material';
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import useSnackbar from '../hooks/useSnackbar';
 import CustomSnackbar from '../component/CustomSnackbar';
+import Header from '../component/Header';
 import { useAuth } from '../context/AuthContext';
+import useSnackbar from '../hooks/useSnackbar';
+import { COLORS, PATHS } from '../util/Constant';
 
 const LoginPage = () => {
   const { snackBarState, showSnackbar, hideSnackbar } = useSnackbar();
@@ -101,7 +100,7 @@ const LoginPage = () => {
                   </Typography>
                 </Grid2> */}
 
-                <Grid2 size={12} sx={{ mt: 0, mb: 0, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                <Grid2 size={12} sx={{ mt: 0, mb: 4, mx: 6, display: 'flex', justifyContent: 'center' }}>
                   <Button
                     variant='contained'
                     size='small'
@@ -111,7 +110,7 @@ const LoginPage = () => {
                     Login
                   </Button>
                 </Grid2>
-                <Grid2 size={12} sx={{ mt: 0, mb: 0, mx: 6, display: 'flex', justifyContent: 'center' }}>
+                {/* <Grid2 size={12} sx={{ mt: 0, mb: 0, mx: 6, display: 'flex', justifyContent: 'center' }}>
                   <Divider>or</Divider>
                 </Grid2>
                 <Grid2 size={12} sx={{ mt: 0, mb: 4, mx: 6, display: 'flex', justifyContent: 'center' }}>
@@ -124,7 +123,7 @@ const LoginPage = () => {
                     <GoogleIcon sx={{ width: 15, height: 15, mx: 1 }} />
                     Login with Google
                   </Button>
-                </Grid2>
+                </Grid2> */}
 
                 <Grid2 size={12} sx={{ mt: 0, mb: 2, mx: 6, height: 'auto' }}>
                   <Typography variant='body1' align='center'>

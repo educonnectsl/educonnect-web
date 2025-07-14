@@ -1,11 +1,11 @@
 import GoogleIcon from "@mui/icons-material/Google";
-import { Box, Button, Container, Divider, FormControlLabel, Grid2, Link, Radio, RadioGroup, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import React, { useState } from "react";
-import Header from "../component/Header";
-import { COLORS, PATHS } from "../util/Constant";
-import { Form, useNavigate } from "react-router-dom";
-import api from "../services/api";
+import { Box, Button, Container, Divider, FormControlLabel, Grid2, Link, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomSnackbar from "../component/CustomSnackbar";
+import Header from "../component/Header";
+import { useAuth } from '../context/AuthContext';
+import { COLORS, PATHS } from "../util/Constant";
 import useSnackbar from "../hooks/useSnackbar";
 
 const SIGNUP_TYPE = { TEACHER: "Teacher", DONOR: "Donor" };
@@ -22,6 +22,7 @@ const SignUpPage = () => {
   const [errors, setErrors] = useState({});
   const { snackBarState, showSnackbar, hideSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const { signup } = useAuth();
 
   const validatePassword = (value) => {
     if (value.length < 8) return "Password must be at least 8 characters long";
@@ -39,7 +40,6 @@ const SignUpPage = () => {
   };
 
   const handleUserTypeChange = (event, newValue) => {
-    console.log("User type changed to:", event.target.value);
     setFormData((prev) => ({
       ...prev,
       userType: newValue,
@@ -84,19 +84,14 @@ const SignUpPage = () => {
           location: "",
           contact_no: "",
           user_type: formData.userType,
-          user_state: "Complete",
+          user_state: "Incomplete",
           facebook_id: timeStamp.toString(),
           google_id: timeStamp.toString()
         };
-        const response = await api.post("/users", payload);
-        if (response.data.access_token && response.data.refresh_token) {
-          localStorage.setItem("access_token", response.data.access_token);
-          localStorage.setItem("refresh_token", response.data.refresh_token);
-        }
+        await signup(payload);
         navigate(PATHS.DASHBOARD);
       } catch (error) {
-        console.error("Signup failed", error);
-        showSnackbar(error.response.data, "error");
+        showSnackbar(error.response?.data || error.message, "error");
       }
     }
   };
@@ -160,14 +155,14 @@ const SignUpPage = () => {
                     onChange={handleUserTypeChange}
                   >
                     <FormControlLabel
-                        value={SIGNUP_TYPE.TEACHER}
-                        control={<Radio />}
-                        label={SIGNUP_TYPE.TEACHER}
+                      value={SIGNUP_TYPE.TEACHER}
+                      control={<Radio />}
+                      label={SIGNUP_TYPE.TEACHER}
                     />
                     <FormControlLabel
-                        value={SIGNUP_TYPE.DONOR}
-                        control={<Radio />}
-                        label={SIGNUP_TYPE.DONOR}
+                      value={SIGNUP_TYPE.DONOR}
+                      control={<Radio />}
+                      label={SIGNUP_TYPE.DONOR}
                     />
                   </RadioGroup>
                 </Grid2>
