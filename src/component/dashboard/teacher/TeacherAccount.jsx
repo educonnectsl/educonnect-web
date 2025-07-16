@@ -2,9 +2,8 @@ import { Autocomplete, Button, Divider, Grid2, MenuItem, Select, TextField, Typo
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import useSnackbar from "../../../hooks/useSnackbar";
-import { SCHOOL_POSITIONS, USER_TYPES } from '../../../util/Constant';
+import { SCHOOL_POSITIONS } from '../../../util/Constant';
 import CustomSnackbar from '../../CustomSnackbar';
-import api from '../../../services/api';
 
 const textFieldStyle = { width: { xs: '80%', md: '60%', lg: '40%' } };
 
@@ -32,15 +31,15 @@ const TeacherAccount = () => {
     currentPassword: "",
     password: "",
     confirmPassword: "",
-    userType: USER_TYPES.TEACHER,
+    userType: user.user_type,
     school: 0,
     position: SCHOOL_POSITIONS.OTHER,
   });
 
 
-  useEffect(() => {
+  const fetchTeacherDetails = async () => {
     try {
-      // const response = api.get('/school', { params: { userId: user.id } });
+      // const response = await api.get(`/user/${user.user_id}/teacher`)
       const response = {} // mocked response
       if (response.data) {
         const schoolDetails = response.data;
@@ -53,6 +52,11 @@ const TeacherAccount = () => {
     } catch (error) {
       showSnackbar("Failed to load school data", "error");
     }
+  };
+
+
+  useEffect(() => {
+    fetchTeacherDetails();
   }, [user]);
 
 
@@ -62,7 +66,7 @@ const TeacherAccount = () => {
       const response = { data: { schools: schools_hardcoded } }; // Mocked response
       return response.data.schools
     } catch (error) {
-      showSnackbar("Failed to load schools", "error");
+      showSnackbar("Failed to load user details", "error");
     }
     return schools_hardcoded;
   });
@@ -86,13 +90,19 @@ const TeacherAccount = () => {
   };
 
 
-  const updateTeacherAccount = () => {
+  const updateTeacherAccount = async () => {
     const timestamp = Date.now();
     if (validateForm()) {
       console.log(formData);
-      showSnackbar("Teacher account updated successfully", "success");
+      try {
+        // await api.put(`/user/${user.user_id}/teacher`, formData);
+        showSnackbar("Teacher account updated successfully", "success");
+      } catch (error) {
+        console.error("Error updating teacher data:", error);
+        showSnackbar("Error updating teacher data", "error");
+      }
     }
-  }
+  };
 
 
   const validatePassword = (value) => {
@@ -155,7 +165,7 @@ const TeacherAccount = () => {
           <Typography variant='body2'>Account type</Typography>
         </Grid2>
         <Grid2 size={{ md: 9, xs: 12 }} sx={{ ml: 2, mb: 1 }}>
-          <Typography variant='body2'><b>Teacher</b></Typography>
+          <Typography variant='body2'><b>{user.user_type}</b></Typography>
         </Grid2>
 
         <Grid2 size={{ md: 2, xs: 12 }} sx={{ ml: 2 }}>
